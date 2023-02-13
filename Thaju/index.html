@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Latest News</title>
+  </head>
+  <body>
+    <h1>Latest News</h1>
+    <ul id="newsList">
+      <!-- The news articles will be added here dynamically -->
+    </ul>
+    
+    <script>
+      // Fetch the latest news from the API
+      var endpoint = "https://newsapi.org/v2/top-headlines?country=us&apiKey=<4cd6347c23954323b4811a814f86d535>";
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          // Extract the news articles
+          var articles = data.articles;
+          
+          // Loop through the articles and add their titles to the page
+          var newsList = document.getElementById("newsList");
+          articles.forEach(article => {
+            var li = document.createElement("li");
+            li.textContent = article.title;
+            newsList.appendChild(li);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>
